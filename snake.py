@@ -20,6 +20,12 @@ def main(screen):
         for segment in snake[1:]:
             screen.addstr(*segment, '*')
 
+        if snake[0] in snake[1:]:
+            screen.addstr(10, 10, 'Game Over, you ate yourself!')
+            screen.refresh()
+            time.sleep(2)
+            break
+
         snake.pop()
         snake.insert(0, tuple(map(sum, zip(snake[0], direction))))
         direction = directions.get(screen.getch(), direction)
